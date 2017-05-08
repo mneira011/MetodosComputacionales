@@ -32,6 +32,8 @@ void genData(char coso[]);
 
 void transInfo();
 
+float darPromedio();
+
 int main(int argc, char const *argv[]) {
   // printf("Iniciando la solucion de la placa...\n" );
 
@@ -83,6 +85,8 @@ void imprimir(){
   }
 }
 void fijasCte(){
+  FILE *arch;
+  arch = fopen("promFijasCte.dat", "w");
   float t = 0;
   int imprimio100 = 0;
   genData("fijasCte0.dat");
@@ -108,15 +112,19 @@ void fijasCte(){
     }
     transInfo();
     t += dt;
+    fprintf(arch,"%f\n",darPromedio() );
     if(t>100 && imprimio100 ==0){
       imprimio100 =1;
       genData("fijasCte100.dat");
     }
   }
   genData("fijasCte2500.dat");
+  fclose(arch);
 }
 void fijasNOCte(){
   // printf("entro\n");
+  FILE *arch;
+  arch = fopen("promFijasNOCte.dat", "w");
   float t = 0;
   int imprimio100 = 0;
   genData("fijasNOCte0.dat");
@@ -136,6 +144,7 @@ void fijasNOCte(){
     }
     transInfo();
     t += dt;
+    fprintf(arch,"%f\n",darPromedio() );
     if(t>100 && imprimio100 ==0){
       imprimio100 =1;
       genData("fijasNOCte100.dat");
@@ -143,9 +152,12 @@ void fijasNOCte(){
     // printf("%f\n", t);
   }
   genData("fijasNOCte2500.dat");
+  fclose(arch);
 
 }
 void periodicasCte(){
+  FILE *arch;
+  arch = fopen("promPeriodicasCte.dat", "w");
   float t = 0;
   int imprimio100 = 0;
   genData("periodicasCte0.dat");
@@ -194,6 +206,7 @@ void periodicasCte(){
     }
     transInfo();
     t += dt;
+    fprintf(arch,"%f\n",darPromedio() );
     if(t>100 && imprimio100 ==0){
       imprimio100 =1;
       genData("periodicasCte100.dat");
@@ -201,8 +214,11 @@ void periodicasCte(){
     // printf("%f\n", t);
   }
   genData("periodicasCte2500.dat");
+  fclose(arch);
 }
 void periodicasNOCte(){
+  FILE *arch;
+  arch = fopen("promPeriodicasNOCte.dat", "w");
   float t = 0;
   int imprimio100 =0;
   genData("periodicasNOCte0.dat");
@@ -246,6 +262,7 @@ void periodicasNOCte(){
     }
     transInfo();
     t += dt;
+    fprintf(arch,"%f\n",darPromedio() );
     if(t>100 && imprimio100 ==0){
       imprimio100 =1;
       genData("periodicasNOCte100.dat");
@@ -254,9 +271,12 @@ void periodicasNOCte(){
     // printf("%f\n", t);
   }
   genData("periodicasNOCte2500.dat");
+  fclose(arch);
 }
 
 void abirtasNOCte(){
+  FILE *arch;
+  arch = fopen("promAbiertasNOCte.dat", "w");
   float t = 0;
   int imprimio100 =0;
   genData("abiertasNOCte0.dat");
@@ -300,6 +320,7 @@ void abirtasNOCte(){
     }
     transInfo();
     t += dt;
+    fprintf(arch,"%f\n",darPromedio() );
     // printf("%f\n", t);
     if(t>100 && imprimio100 ==0){
       imprimio100 =1;
@@ -307,8 +328,11 @@ void abirtasNOCte(){
     }
   }
     genData("abiertasNOCte2500.dat");
+    fclose(arch);
 }
 void abirtasCte(){
+  FILE *arch;
+  arch = fopen("promAbiertasCte.dat", "w");
   float t = 0;
   int imprimio100 =0;
   genData("abiertasCte0.dat");
@@ -358,6 +382,7 @@ void abirtasCte(){
     }
     transInfo();
     t += dt;
+    fprintf(arch,"%f\n",darPromedio() );
     // printf("%f\n", t);
     if(t>100 && imprimio100 ==0){
       imprimio100 =1;
@@ -365,6 +390,7 @@ void abirtasCte(){
     }
   }
   genData("abiertasCte2500.dat");
+  fclose(arch);
 }
 
 
@@ -389,4 +415,13 @@ void genData(char coso[]){
 
    }
    fclose(fp);
+}
+float darPromedio(){
+  int i =0;
+  float promedio = 0;
+  for(;i<100*100;i++){
+    promedio += placa[i];
+  }
+  promedio /= (100*100);
+  return promedio;
 }
