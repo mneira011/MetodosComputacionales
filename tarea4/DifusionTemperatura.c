@@ -2,10 +2,10 @@
 #include "stdio.h"
 #include <math.h>
 
-float v = 0.1;
+float v = 1;
 float dx = 1;
-float dt = 0.49;
-float alph = 0.49;
+float dt = 0.25;
+float alph = 0.25;
 //para compilar, corre el comando al final con -lm
 //esta va a ser la placa
 float *placa;
